@@ -1,24 +1,15 @@
-/**
- *  Pozdrav Stefana, evo mog koda pa malo baci pogled kada budes imala vremena.
- *  Verujem da ima dosta gresaka , bice mi drago da cujem tvoje misljenje i prihvatim savete
- *  Nema neke velike povezanosti sa frontend-om vise je JS
- * 
- *  Na kraju fajla i u komentarima koda postoje pitanja.
- * 
- */
-
 'use strict';
 
-function Numbers(number) {
+function Numbers( number ) {
     this.number = number;
 }
 
 // Total numbers array for otput the numbers that user can submitt
-Numbers.prototype.numbersToSelect = function (totalNumbers) {
+Numbers.prototype.numbersToSelect = function ( totalNumbers ) {
 
     let totalNumbersArr = [];
 
-    for (let i = 1; i <= totalNumbers; i++) {
+    for ( let i = 1; i <= totalNumbers; i++ ) {
         totalNumbersArr.push(i);
     }
 
@@ -28,23 +19,17 @@ Numbers.prototype.numbersToSelect = function (totalNumbers) {
 // Random array for numbers that user must guess to win the game
 Numbers.prototype.ranGenerator = function () {
 
-    // Set array to be empty
     let randomNumbersArr = [];
 
-    // Setting scope of pissible random numbers;
     let totalNumbers = this.numbersToSelect(80);
 
-    //console.log(totalNumbers);
-
     // Checking length of arr
-    while (randomNumbersArr.length < 20) {
-        // Generating single random number, adding 1 for avoiding number 0
-        let randomNumber = Math.floor(Math.random() * totalNumbers.length) + 1;
+    while ( randomNumbersArr.length < 20 ) {
+        let randomNumber = Math.floor(Math.random() * totalNumbers.length ) + 1;
 
-        // Checing if number already exists in array
-        if (randomNumbersArr.indexOf(randomNumber) === -1) {
-            // Pushing number to array
-            randomNumbersArr.push(randomNumber);
+        if ( randomNumbersArr.indexOf( randomNumber ) === -1 ) {
+
+            randomNumbersArr.push( randomNumber );
         }
     }
     return randomNumbersArr;
@@ -53,10 +38,10 @@ Numbers.prototype.ranGenerator = function () {
 function UserInterface() {}
 
 // Creating new object and connect prototype
-UserInterface.prototype = Object.create(Numbers.prototype);
+UserInterface.prototype = Object.create( Numbers.prototype );
 
 // Selecting color based on noumber output
-UserInterface.prototype.bingoNumbersColor = function (number) {
+UserInterface.prototype.bingoNumbersColor = function ( number ) {
     let backgroundColor;
 
     if (number <= 10) {
@@ -88,9 +73,9 @@ UserInterface.prototype.bingoNumbersColor = function (number) {
 }
 
 // Style and display bingo element
-UserInterface.prototype.displayBingoElement = function (number) {
-    const bingoContainer = document.querySelector('.bingoContainer');
-    const bingoElement = document.createElement('div');
+UserInterface.prototype.displayBingoElement = function ( number ) {
+    const bingoContainer = document.querySelector( '.bingoContainer' );
+    const bingoElement = document.createElement( 'div' );
 
     bingoElement.style.height = 70 + 'px';
     bingoElement.style.width = 70 + 'px';
@@ -103,85 +88,82 @@ UserInterface.prototype.displayBingoElement = function (number) {
     bingoElement.style.padding = '10px';
     bingoElement.style.textAlign = 'center';
     bingoElement.style.lineHeight = '50px';
-    // Zasto ne mogu da pozovem bingoNumbersColor sa this (this.bingoNumbersColor (this bi trebalo da predstavalja Objekat UserInterface))
-    bingoElement.style.backgroundColor = userInterface.bingoNumbersColor(number);
+    bingoElement.style.backgroundColor = userInterface.bingoNumbersColor( number );
 
-    return (bingoContainer.appendChild(bingoElement));
+    return ( bingoContainer.appendChild( bingoElement ) );
 }
 
-// U ovom bloku oivicenom crticama bi mozda mogao da napravim jednu funkciju 
-////================================================== napravi jednu funkciju ==================================================///
-
 // Displaying number Element
-UserInterface.prototype.displayNumberElement = function (number) {
+UserInterface.prototype.displayNumberElement = function ( number ) {
     const container = document.querySelector('.container');
 
     const numbersForSelect = document.createElement('div');
     numbersForSelect.className = 'numberDiv';
     numbersForSelect.textContent = number;
 
-    return (container.appendChild(numbersForSelect));
+    return (container.appendChild( numbersForSelect ));
 }
 
-UserInterface.prototype.displayTicketSingleElement = function (number) {
+UserInterface.prototype.displayTicketSingleElement = function ( number ) {
     const ticketContainer = document.querySelector('.ticketNumberDivContainer');
 
     const numbersForSelect = document.createElement('div');
     numbersForSelect.className = 'ticketNumberDiv';
     numbersForSelect.textContent = number;
 
-    return (ticketContainer.appendChild(numbersForSelect));
+    return ( ticketContainer.appendChild( numbersForSelect ) );
 }
-///==============================================================================================================///
 
-UserInterface.prototype.displayTicketElement = function (elementTextContent) {
+//Display ticket Element
+UserInterface.prototype.displayTicketElement = function ( elementTextContent ) {
 
-    elementTextContent.forEach(element => {
-        this.displayTicketSingleElement(element);
+    elementTextContent.forEach( element => {
+        this.displayTicketSingleElement( element );
     });
 }
 
-UserInterface.prototype.createDivForSingleElement = function (func, innerFunc) {
+
+UserInterface.prototype.createDivForSingleElement = function ( func, innerFunc ) {
 
     let returnedElementsArr = []
     let elementsArr = func;
     
-    elementsArr.forEach((element) => {
-        returnedElementsArr.push(innerFunc(element));
+    elementsArr.forEach( ( element ) => {
+        returnedElementsArr.push( innerFunc ( element ) );
     });
 
     return returnedElementsArr;
 }
 
-UserInterface.prototype.createStartButton = function (text, message) {
+UserInterface.prototype.createStartButton = function ( text, message ) {
     const startButton = document.createElement('div');
 
     startButton.className = 'startDiv' ;
     startButton.innerHTML = `
-        <h1>${text}</h1>
+        <h1> ${text} </h1>
         <p> ${message} </p>
     `;
 
-    return document.body.appendChild(startButton);
+    return document.body.appendChild( startButton );
 }
 
-UserInterface.prototype.checkingTicketAndOutNum = function ( outNumbers, ticketNumbers){
+UserInterface.prototype.checkingTicketAndOutNum = function ( outNumbers, ticketNumbers ){
 
     const correctTicketNumbers = [];
     let missedNumbers = [];
 
     outNumbers.forEach( ( element ) => {
-        if( ticketNumbers.indexOf( element ) !== -1 ){
-            
+        if( ticketNumbers.indexOf( element ) !== -1 )
+        {    
             correctTicketNumbers.push( element );  
         }
-        else {
+        else 
+        {
             missedNumbers.push( element );
         }
     });
 
     return [ correctTicketNumbers, missedNumbers ];
-
 }
 
 UserInterface.prototype.selectedNumbers = function () {
@@ -190,124 +172,116 @@ UserInterface.prototype.selectedNumbers = function () {
     let selectedNumbersArr = [];
     let allElementsForSelect = this.createDivForSingleElement( this.numbersToSelect(80), this.displayNumberElement );
 
-    allElementsForSelect.forEach((element) => {
+    allElementsForSelect.forEach( ( element ) => {
 
-        element.addEventListener('click',  (e) => {
+        element.addEventListener( 'click',  ( e ) => {
 
             const ticketNum = document.querySelectorAll('.ticketNumberDiv');
 
-            ticketNum.forEach((number) => {
+            ticketNum.forEach( ( number ) => {
                 number.remove();
             });
             
             // Problem: kada se iz niza izbaci peti element prolazi funkcija createStartButton
-            if (selectedNumbersArr.length <= 6) {
+            if ( selectedNumbersArr.length <= 6 ) {
 
                 
-                if (selectedNumbersArr.indexOf(+element.textContent) !== -1) {
+                if ( selectedNumbersArr.indexOf( +element.textContent ) !== -1 ) {
                     
-                    selectedNumbersArr.splice(selectedNumbersArr.indexOf(+element.textContent), 1);
+                    selectedNumbersArr.splice( selectedNumbersArr.indexOf( +element.textContent ), 1);
                     element.style.backgroundColor = '#fff';
-                    //console.log('Number Selected! ');
                     cnt--;
                 }
                 
-                else if (selectedNumbersArr.length < 6) {
-                    selectedNumbersArr.push(+element.textContent);
+                else if ( selectedNumbersArr.length < 6 ) {
+                    selectedNumbersArr.push( +element.textContent );
                     element.style.backgroundColor = '#bbb';
                     cnt++;
                 }
                 
-                if (selectedNumbersArr.length == 6) {
+                if ( selectedNumbersArr.length == 6 ) {
                     
-                    this.createStartButton('START', 'Press to start game!').addEventListener('click', (e) => {
+                    this.createStartButton( 'START', 'Press to start game!').addEventListener( 'click', ( e ) => {
 
                         let ranNumbers = this.ranGenerator();
                         let corrNumbers;
                         let missNumbers;
-                        console.log(ranNumbers);
+                        //console.log(ranNumbers);
                         
-                        [corrNumbers, missNumbers] = this.checkingTicketAndOutNum(ranNumbers, selectedNumbersArr);
-                        console.log(corrNumbers);
-                        
-                            for (let i = 0; i < ranNumbers.length; i++){
+                        [ corrNumbers, missNumbers ] = this.checkingTicketAndOutNum( ranNumbers, selectedNumbersArr );
+                                                
+                            for ( let i = 0; i < ranNumbers.length; i++ ){
                                 setTimeout(() => {
                                 
-                                this.displayBingoElement(ranNumbers[i]);
+                                    this.displayBingoElement( ranNumbers[i] );
 
-                                if (corrNumbers.indexOf(ranNumbers[i]) !== -1){
+                                    if ( corrNumbers.indexOf ( ranNumbers[i] ) !== -1 ){
 
-                                    const cn = [];
-                                    cn.push(ranNumbers[i]);
+                                        const cn = [];
+                                        cn.push( ranNumbers[i] );
 
-                                    allElementsForSelect.forEach((elem)=>{
+                                        allElementsForSelect.forEach( ( elem )=>{
 
-                                        let elemInt = +elem.textContent; 
+                                            let elemInt = +elem.textContent; 
 
-                                        if(cn.indexOf(elemInt) !== -1)
-                                        {
-
-                                            elem.style.backgroundColor ='red';
-                                            elem.style.color="#fff";
-                                            console.log(ticketNum)
-                                            ticketNum.forEach((number) => {
+                                            if( cn.indexOf ( elemInt ) !== -1 )
+                                            {
+                                                elem.style.backgroundColor ='red';
+                                                elem.style.color="#fff";
+                                                //console.log(ticketNum)
+                                                
+                                                ticketNum.forEach( ( number ) => {
                                                     let intNum = +number.textContent;
-                                                if(cn.indexOf(intNum) !== -1){
-                                                    number.style.backgroundColor ='red';
-                                                }
-                                            });
-                                        }
-                                    });
-                                } 
-                                else if (missNumbers.indexOf(ranNumbers[i]) !== -1){
-                                    
-                                    const mn = [];
-                                    mn.push(ranNumbers[i]);
-                                    
-                                    allElementsForSelect.forEach((elem)=>{
-
-                                        let elemInt = +elem.textContent; 
-
-                                        if(mn.indexOf(elemInt) !== -1)
-                                        {
-
-                                            elem.style.backgroundColor ='blue';
-                                            elem.style.color="#fff";
-                                        }
+                                                    
+                                                    if( cn.indexOf( intNum ) !== -1 )
+                                                    {
+                                                        number.style.backgroundColor ='red';
+                                                    }
+                                                });
+                                            }
                                         });
-                                } 
-                            }, i * 1000);
+                                    }
+                                    else if ( missNumbers.indexOf( ranNumbers[i] ) !== -1 ){
+                                        
+                                        const mn = [];
+                                        mn.push( ranNumbers[i] );
+                                        
+                                        allElementsForSelect.forEach( ( elem )=>{
+
+                                            let elemInt = +elem.textContent; 
+
+                                            if( mn.indexOf ( elemInt ) !== -1 )
+                                            {
+                                                elem.style.backgroundColor ='blue';
+                                                elem.style.color="#fff";
+                                            }
+                                            });
+                                    }
+
+                                }, i * 1000 );
                             }
                             
                             const startButton = document.querySelector('.startDiv');
                             startButton.remove();
 
                             setTimeout(() => {
-                                if(corrNumbers.length >= 1){
-                                    console.log(document.querySelector('.message'));
-                                    let msgWin = document.querySelector('.message').style.visibility = 'visible';
-                                    msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="/index.html">click here</a></h1>
-                                    <p>You got ${corrNumbers.length} correct noumbers !</p>`
-                                }
-                                else {
+                                if(corrNumbers.length >= 1)
+                                {
+                                    let msgWin = document.querySelector('.message__content--text');
                                     
+                                    msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="/index.html">click here</a></h1>
+                                    <p>You got ${corrNumbers.length} correct noumbers !</p>`;
+                                    msgWin = document.querySelector('.message').style.visibility = 'visible';
+                                }
+                                else {          
                                     let msgLose = document.querySelector('.message');
                                     let msgLoseText = document.querySelector('.message__content--text');
-                                    msgLoseText.innerHTML = `<h1>You lose, you can <a href="/index.html">click here</a> and try again</h1>
-                                                        <p>You got only ${corrNumbers.length} correct noumbers !</p>`;
+                                    
+                                    msgLoseText.innerHTML = `<h1>You lose, you can <a href="/index.html">click here</a> and try again</h1> <p>You got only ${corrNumbers.length} correct noumbers !</p>`;
                                     console.log(`Bad luck you have , try again`);
                                     msgLose.style.visibility = 'visible';
-
                                 }
 
-                                // this.createStartButton('AGAIN?', 'Press on this button to play again! :)').addEventListener('click', function(e){
-        
-                                    
-                                //     window.location = 'index.html';
-        
-                                //     e.preventDefault();
-                                // });
-                                //this.finalMessage('Congradulations you won the game');
                             }, 21 * 1000);
                         
                         e.preventDefault();
@@ -317,11 +291,9 @@ UserInterface.prototype.selectedNumbers = function () {
             }
 
             //console.log(selectedNumbersArr);
-            this.displayTicketElement(selectedNumbersArr);
+            this.displayTicketElement( selectedNumbersArr );
 
-            
-
-            console.log(cnt)
+            //console.log(cnt)
             e.preventDefault();
         });
     });
@@ -330,34 +302,9 @@ UserInterface.prototype.selectedNumbers = function () {
     return selectedNumbersArr;
 }
 
-
-
-let singleNumber = new Numbers(1);
+let singleNumber = new Numbers( 1 );
 let userInterface = new UserInterface();
 userInterface.selectedNumbers();
-
-/** TO DO...
- *
- * Izbaciti hover sa brojeva koji se mogu selektovati nakon sto je pritisnut START.
- * Promeniti oblik elmentata brojeva koji se mogu selektovati u odnosu na vrednost brojeva koji su izasli
- * Promeniti oblik elemenata koje je korisnik uneo u polju Tiket i ispisati koliko je brojeva pogodio
- * Napraviti element kako bi korisnik video da li je tiket dobitan i jos jedan za ponovnu igru(refresh page)
- *
- */
-
-/**
- * Da li sam na svakoj metodi trebao da vratim vrednost?
- *
- * Kako sam trebao da organizujem kod? Mislim da mi cak nisu ni potrebna dva objekta.
- *
- * Cini mi se i da imam problem sto svaku metodu moram da pozovem kako bi vratila vrednost. Nisam ni siguran kako bih mogao to da uradim npr da bude const broj = this.randomBroj, a ne const broj = this.randomBroj(). Nadam se da si me razumela :D
- *
- * Kako bih pozivao metode tako da upucuju na dati objekat, bez nove funkcije sa strelicom, kada u metodi imam jos jednu funkciju? Znam da je bind, call i apply ali ne znam kako bih tacno povezao to..
- *
- * Mislim da je to sve sto imam za sada....
- *
- * Hvala puno i izvini na uznemiravanju :)
- */
 
 
 
