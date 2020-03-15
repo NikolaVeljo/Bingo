@@ -265,7 +265,7 @@ UserInterface.prototype.selectedNumbers = function () {
                             startButton.remove();
 
                             setTimeout(() => {
-                                if(corrNumbers.length >= 1)
+                                if(corrNumbers.length >= 3)
                                 {
                                     let msgWin = document.querySelector('.message__content--text');
                                     
