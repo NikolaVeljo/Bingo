@@ -271,7 +271,7 @@ UserInterface.prototype.selectedNumbers = function () {
                             {
                                 let msgWin = document.querySelector('.message__content--text');
                                 
-                                msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="/index.html">click here</a></h1>
+                                msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="/Bingo">click here</a></h1>
                                 <p>You got ${corrNumbers.length} correct noumbers !</p>`;
                                 msgWin = document.querySelector( '.message' ).style.visibility = 'visible';
                             }
@@ -279,7 +279,7 @@ UserInterface.prototype.selectedNumbers = function () {
                                 let msgLose = document.querySelector( '.message' );
                                 let msgLoseText = document.querySelector( '.message__content--text' );
                                 
-                                msgLoseText.innerHTML = `<h1>You lose, you can <a href="/index.html">click here</a> and try again</h1> <p>You got only ${ corrNumbers.length } correct noumbers !</p>`;
+                                msgLoseText.innerHTML = `<h1>You lose, you can <a href="/Bingo">click here</a> and try again</h1> <p>You got only ${ corrNumbers.length } correct noumbers !</p>`;
                                 msgLose.style.visibility = 'visible';
                             }
                             
