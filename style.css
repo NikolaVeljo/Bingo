@@ -73,7 +73,7 @@ body{
     padding: 10px;
 }
 
-.numberDiv:hover{
+.hover{
     background-color: #f3f3f3;
     cursor: pointer;
     -webkit-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.75);

@@ -4,7 +4,6 @@ function Numbers( number ) {
     this.number = number;
 }
 
-// Total numbers array for otput the numbers that user can submitt
 Numbers.prototype.numbersToSelect = function ( totalNumbers ) {
 
     let totalNumbersArr = [];
@@ -16,7 +15,6 @@ Numbers.prototype.numbersToSelect = function ( totalNumbers ) {
     return totalNumbersArr;
 }
 
-// Random array for numbers that user must guess to win the game
 Numbers.prototype.ranGenerator = function () {
 
     let randomNumbersArr = [];
@@ -37,10 +35,8 @@ Numbers.prototype.ranGenerator = function () {
 
 function UserInterface() {}
 
-// Creating new object and connect prototype
 UserInterface.prototype = Object.create( Numbers.prototype );
 
-// Selecting color based on noumber output
 UserInterface.prototype.bingoNumbersColor = function ( number ) {
     let backgroundColor;
 
@@ -180,15 +176,16 @@ UserInterface.prototype.selectedNumbers = function () {
 
             ticketNum.forEach( ( number ) => {
                 number.remove();
+                console.log( number );
             });
             
-            // Problem: kada se iz niza izbaci peti element prolazi funkcija createStartButton
+
             if ( selectedNumbersArr.length <= 6 ) {
 
                 
                 if ( selectedNumbersArr.indexOf( +element.textContent ) !== -1 ) {
                     
-                    selectedNumbersArr.splice( selectedNumbersArr.indexOf( +element.textContent ), 1);
+                    selectedNumbersArr.splice( selectedNumbersArr.indexOf( +element.textContent ), 1 );
                     element.style.backgroundColor = '#fff';
                     cnt--;
                 }
@@ -199,115 +196,126 @@ UserInterface.prototype.selectedNumbers = function () {
                     cnt++;
                 }
                 
+
                 if ( selectedNumbersArr.length == 6 ) {
                     
+                    
                     this.createStartButton( 'START', 'Press to start game!').addEventListener( 'click', ( e ) => {
-
+                        
                         let ranNumbers = this.ranGenerator();
                         let corrNumbers;
                         let missNumbers;
-                        //console.log(ranNumbers);
                         
                         [ corrNumbers, missNumbers ] = this.checkingTicketAndOutNum( ranNumbers, selectedNumbersArr );
-                                                
-                            for ( let i = 0; i < ranNumbers.length; i++ ){
-                                setTimeout(() => {
+                        
+                        for ( let i = 0; i < ranNumbers.length; i++ ){
+                            
+                            setTimeout(() => {
                                 
-                                    this.displayBingoElement( ranNumbers[i] );
-
-                                    if ( corrNumbers.indexOf ( ranNumbers[i] ) !== -1 ){
-
-                                        const cn = [];
-                                        cn.push( ranNumbers[i] );
-
-                                        allElementsForSelect.forEach( ( elem )=>{
-
-                                            let elemInt = +elem.textContent; 
-
-                                            if( cn.indexOf ( elemInt ) !== -1 )
-                                            {
-                                                elem.style.backgroundColor ='red';
-                                                elem.style.color="#fff";
-                                                //console.log(ticketNum)
+                                this.displayBingoElement( ranNumbers[i] );
+                                
+                                if ( corrNumbers.indexOf ( ranNumbers[i] ) !== -1 ){
+                                    
+                                    const cn = [];
+                                    cn.push( ranNumbers[i] );
+                                    
+                                    allElementsForSelect.forEach( ( elem )=>{
+                                        
+                                        let elemInt = +elem.textContent; 
+                                        
+                                        if( cn.indexOf ( elemInt ) !== -1 )
+                                        {
+                                            elem.style.backgroundColor ='red';
+                                            elem.style.color="#fff";
+                                            
+                                            ticketNum.forEach( ( number ) => {
+                                                let intNum = +number.textContent;
                                                 
-                                                ticketNum.forEach( ( number ) => {
-                                                    let intNum = +number.textContent;
-                                                    
-                                                    if( cn.indexOf( intNum ) !== -1 )
-                                                    {
-                                                        number.style.backgroundColor ='red';
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    }
-                                    else if ( missNumbers.indexOf( ranNumbers[i] ) !== -1 ){
-                                        
-                                        const mn = [];
-                                        mn.push( ranNumbers[i] );
-                                        
-                                        allElementsForSelect.forEach( ( elem )=>{
-
-                                            let elemInt = +elem.textContent; 
-
-                                            if( mn.indexOf ( elemInt ) !== -1 )
-                                            {
-                                                elem.style.backgroundColor ='blue';
-                                                elem.style.color="#fff";
-                                            }
+                                                if( cn.indexOf( intNum ) !== -1 )
+                                                {
+                                                    number.style.backgroundColor ='red';
+                                                }
                                             });
-                                    }
 
-                                }, i * 1000 );
+                                        }
+
+                                    });
+
+                                }
+                                else if ( missNumbers.indexOf( ranNumbers[i] ) !== -1 ){
+                                    
+                                    const mn = [];
+                                    mn.push( ranNumbers[i] );
+                                    
+                                    allElementsForSelect.forEach( ( elem )=>{
+                                        
+                                        let elemInt = +elem.textContent; 
+                                        
+                                        if( mn.indexOf ( elemInt ) !== -1 )
+                                        {
+                                            elem.style.backgroundColor ='blue';
+                                            elem.style.color="#fff";
+                                        }
+                                    });
+                                }
+                                
+                            }, i * 1000 );
+
+                        }
+                        
+                        const startButton = document.querySelector( '.startDiv' );
+                        startButton.remove();
+                        
+                        setTimeout( () => {
+                            if( corrNumbers.length >= 3 )
+                            {
+                                let msgWin = document.querySelector('.message__content--text');
+                                
+                                msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="/index.html">click here</a></h1>
+                                <p>You got ${corrNumbers.length} correct noumbers !</p>`;
+                                msgWin = document.querySelector( '.message' ).style.visibility = 'visible';
+                            }
+                            else {          
+                                let msgLose = document.querySelector( '.message' );
+                                let msgLoseText = document.querySelector( '.message__content--text' );
+                                
+                                msgLoseText.innerHTML = `<h1>You lose, you can <a href="/index.html">click here</a> and try again</h1> <p>You got only ${ corrNumbers.length } correct noumbers !</p>`;
+                                msgLose.style.visibility = 'visible';
                             }
                             
-                            const startButton = document.querySelector('.startDiv');
-                            startButton.remove();
-
-                            setTimeout(() => {
-                                if(corrNumbers.length >= 3)
-                                {
-                                    let msgWin = document.querySelector('.message__content--text');
-                                    
-                                    msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="/index.html">click here</a></h1>
-                                    <p>You got ${corrNumbers.length} correct noumbers !</p>`;
-                                    msgWin = document.querySelector('.message').style.visibility = 'visible';
-                                }
-                                else {          
-                                    let msgLose = document.querySelector('.message');
-                                    let msgLoseText = document.querySelector('.message__content--text');
-                                    
-                                    msgLoseText.innerHTML = `<h1>You lose, you can <a href="/index.html">click here</a> and try again</h1> <p>You got only ${corrNumbers.length} correct noumbers !</p>`;
-                                    console.log(`Bad luck you have , try again`);
-                                    msgLose.style.visibility = 'visible';
-                                }
-
-                            }, 21 * 1000);
+                        }, 21 * 1000 );
                         
                         e.preventDefault();
                     });
+                              
+                    if ( document.querySelectorAll( '.startDiv' ).length >= 2 ){
+
+                        document.querySelector('.startDiv').remove();
+
+                    }
+                }
+                else {
+
+                    if ( document.querySelector('.startDiv') ){
+
+                        document.querySelector('.startDiv').remove();
+
+                    }
                 }
 
             }
 
-            //console.log(selectedNumbersArr);
             this.displayTicketElement( selectedNumbersArr );
 
-            //console.log(cnt)
             e.preventDefault();
         });
+
     });
 
-    //console.log(selectedNumbersArr);
+
     return selectedNumbersArr;
 }
 
 let singleNumber = new Numbers( 1 );
 let userInterface = new UserInterface();
 userInterface.selectedNumbers();
-
-
-
-
-
-
