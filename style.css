@@ -205,3 +205,19 @@ body{
     text-transform: uppercase;
     text-align: center;
 }
+
+
+.code {
+    position: fixed;
+    z-index: 9999;
+    color: #fff;
+    font-size: 30px;
+}
+.code a {
+    text-decoration: none;
+    color: white;
+}
+
+.code a:hover{
+    color: #ccc;
+}
