@@ -64,7 +64,7 @@ body{
 
 
 .bingoContainer {
-    width: 60vw;
+    width: 100%;
     display:grid;
     grid-template-columns: repeat(auto-fill, minmax(40px, 80px));
     grid-gap: 1rem;
@@ -87,6 +87,13 @@ body{
 
 .bingoElement {
     animation: moveInLeft .5s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 2.5rem;
+
 }
 
 @media (max-width: 600px){
