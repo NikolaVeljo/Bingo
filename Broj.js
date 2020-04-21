@@ -73,14 +73,10 @@ UserInterface.prototype.displayBingoElement = function ( number ) {
     const bingoContainer = document.querySelector( '.bingoContainer' );
     const bingoElement = document.createElement( 'div' );
 
-    bingoElement.style.height = 70 + 'px';
-    bingoElement.style.width = 70 + 'px';
-
     bingoElement.className = 'bingoElement';
     bingoElement.textContent = number;
     bingoElement.style.borderRadius = '50%';
     bingoElement.style.margin = '5px';
-    bingoElement.style.fontSize = '26px';
     bingoElement.style.padding = '10px';
     bingoElement.style.textAlign = 'center';
     bingoElement.style.lineHeight = '50px';
@@ -97,7 +93,7 @@ UserInterface.prototype.displayNumberElement = function ( number ) {
     numbersForSelect.className = 'numberDiv';
     numbersForSelect.textContent = number;
 
-    return (container.appendChild( numbersForSelect ));
+    return ( container.appendChild( numbersForSelect ) );
 }
 
 UserInterface.prototype.displayTicketSingleElement = function ( number ) {
@@ -162,6 +158,14 @@ UserInterface.prototype.checkingTicketAndOutNum = function ( outNumbers, ticketN
     return [ correctTicketNumbers, missedNumbers ];
 }
 
+UserInterface.prototype.mobileOutput = function ( content ) {
+    let mobileOut = document.createElement('div');
+    mobileOut.className = 'mobile__output';
+    mobileOut.appendChild( content );
+
+    document.body.appendChild( mobileOut );
+}
+
 UserInterface.prototype.selectedNumbers = function () {
 
     let cnt = 0;
@@ -211,57 +215,75 @@ UserInterface.prototype.selectedNumbers = function () {
                         for ( let i = 0; i < ranNumbers.length; i++ ){
                             
                             setTimeout(() => {
-                                
-                                this.displayBingoElement( ranNumbers[i] );
-                                
-                                if ( corrNumbers.indexOf ( ranNumbers[i] ) !== -1 ){
+
+                                if( window.outerWidth <= 600 )
+                                {
+                                    this.mobileOutput( this.displayBingoElement( ranNumbers[i] ) );
+                                }
+                                else {
                                     
-                                    const cn = [];
-                                    cn.push( ranNumbers[i] );
-                                    
-                                    allElementsForSelect.forEach( ( elem )=>{
+                                    this.displayBingoElement( ranNumbers[i] );
+                                }
+                                
+                                
+                                setTimeout(() => {
+                                    if ( corrNumbers.indexOf ( ranNumbers[i] ) !== -1 ){
                                         
-                                        let elemInt = +elem.textContent; 
+                                        const cn = [];
+                                        cn.push( ranNumbers[i] );
                                         
-                                        if( cn.indexOf ( elemInt ) !== -1 )
-                                        {
-                                            elem.style.backgroundColor ='red';
-                                            elem.style.color="#fff";
+                                        allElementsForSelect.forEach( ( elem )=>{
                                             
-                                            ticketNum.forEach( ( number ) => {
-                                                let intNum = +number.textContent;
+                                            let elemInt = +elem.textContent; 
+                                            
+                                            if( cn.indexOf ( elemInt ) !== -1 )
+                                            {
+                                                elem.style.backgroundColor ='red';
+                                                elem.style.color="#fff";
                                                 
-                                                if( cn.indexOf( intNum ) !== -1 )
-                                                {
-                                                    number.style.backgroundColor ='red';
-                                                }
-                                            });
-
-                                        }
-
-                                    });
-
-                                }
-                                else if ( missNumbers.indexOf( ranNumbers[i] ) !== -1 ){
-                                    
-                                    const mn = [];
-                                    mn.push( ranNumbers[i] );
-                                    
-                                    allElementsForSelect.forEach( ( elem )=>{
+                                                ticketNum.forEach( ( number ) => {
+                                                    let intNum = +number.textContent;
+                                                    
+                                                    if( cn.indexOf( intNum ) !== -1 )
+                                                    {
+                                                        number.style.backgroundColor ='red';
+                                                    }
+                                                });
+    
+                                            }
+    
+                                        });
+    
+                                    }
+                                    else if ( missNumbers.indexOf( ranNumbers[i] ) !== -1 ){
                                         
-                                        let elemInt = +elem.textContent; 
+                                        const mn = [];
+                                        mn.push( ranNumbers[i] );
                                         
-                                        if( mn.indexOf ( elemInt ) !== -1 )
-                                        {
-                                            elem.style.backgroundColor ='blue';
-                                            elem.style.color="#fff";
-                                        }
-                                    });
-                                }
+                                        allElementsForSelect.forEach( ( elem )=>{
+                                            
+                                            let elemInt = +elem.textContent; 
+                                            
+                                            if( mn.indexOf ( elemInt ) !== -1 )
+                                            {
+                                                elem.style.backgroundColor ='blue';
+                                                elem.style.color="#fff";
+                                            }
+                                        });
+                                    }
+                                    
+                                    if ( document.querySelector('.mobile__output') )
+                                    {
+                                        document.querySelector('.mobile__output').remove();
+                                    }
+
+                                }, 2200 );
+
                                 
-                            }, i * 1000 );
-
+                            }, i * 3000 );
+                            
                         }
+                        
                         
                         const startButton = document.querySelector( '.startDiv' );
                         startButton.remove();
@@ -283,7 +305,7 @@ UserInterface.prototype.selectedNumbers = function () {
                                 msgLose.style.visibility = 'visible';
                             }
                             
-                        }, 21 * 1000 );
+                        }, 21 * 3000 );
                         
                         e.preventDefault();
                     });

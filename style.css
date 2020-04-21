@@ -1,38 +1,56 @@
-*{
+*,
+*::before,
+*::after{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: inherit;
 }
 
 html{
-    font-size: 65.2%;
+    font-size: 62.5%;
 }
 
-@media (max-width: 600px){
+@media(max-width: 900px){
+    html{
+        font-size: 55%;
+    }
+}
+
+@media(max-width: 750px){
     html{
         font-size: 50%;
     }
 }
 
+@media(max-width: 600px){
+    html{
+        font-size: 45%;
+    }
+}
+
 body{
-    font-size: 1.6rem;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 300;
+    line-height: 1.6rem;
 }
 
 .wrapper{
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 150px 1fr 1fr 100px;
-    grid-gap: 20px;
+    grid-gap: 2rem;
     justify-content: center;
     position:relative;
 }
+
 /* *******************HEADER******************* */
 .header{
     /* background-image: linear-gradient(to right #2d6bf9,#013bb9); */
     background-image: linear-gradient(to right, #2c6af9, #023dba);
     display:grid;
+    min-height: 10rem;
     padding: 1rem;
     color: white;
+    font-size: 1.6rem;
 }
 
 .header--title--rule{
@@ -53,37 +71,42 @@ body{
     justify-items: center;
     align-items: center;
 }
+
+@media (max-width: 600px){
+    .bingoContainer{
+        display: none;
+    }
+}
+
 .bingoElement {
-    
     animation: moveInLeft .5s ease-in;
+}
+
+@media (max-width: 600px){
+    .bingoElement{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 40%;
+        font-size: 25rem;
+    }
 }
 
 .container {
     width: 110rem;
     display:grid;
-    grid-template-columns: repeat(auto-fill, 45px);
+    grid-template-columns: repeat(8, 1fr);
     grid-gap: 1rem;
     justify-self: center;
     align-items: center;
     text-align: center;
     animation: moveInLeft .5s ease-in;
 }
-.numberDiv{
-    border: 1px solid #ccc;
-    padding: 10px;
-}
 
-.hover{
-    background-color: #f3f3f3;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.75);
-}
-
-@media (min-width: 600px){
-    .bingoContainer{
-        grid-template-columns: repeat(auto-fill, 100px);
+@media( max-width: 600px ){
+    .container{
+        max-width: 50rem;
     }
 }
 @media (max-width: 1200px){
@@ -91,6 +114,22 @@ body{
         width: 55rem;
     }
 }
+
+.numberDiv{
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 600px){
+    .bingoContainer{
+        grid-template-columns: repeat(auto-fill, 100px);
+    }
+}
+
 
 @keyframes moveInLeft {
     0%{
@@ -129,10 +168,18 @@ body{
 .ticketContainer{
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(2, minmax(1fr, 100px));
+    grid-template-columns: repeat(2, minmax(1fr, 100px) );
     align-content: center;
     justify-content: center;
-    grid-gap: 1fr;
+    grid-gap: 2rem;
+    font-size: 1.3rem;
+}
+
+
+@media (max-width: 600px){
+    .ticketContainer{
+        display: none;
+    }
 }
 
 .ticketNumberDivContainer{
@@ -154,8 +201,8 @@ body{
     position: fixed;
     width: 20rem;
     height: 12rem;
-    top: 20rem;
-    left: 1rem;
+    bottom: 5rem;
+    left: 35%;
     border: 1px solid #333;
     border-radius: 1rem;
     align-content: center;
@@ -206,6 +253,16 @@ body{
     text-align: center;
 }
 
+.mobile__output{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    background-color:rgba(0, 0, 0, 0.604);
+}
 
 .code {
     position: fixed;
