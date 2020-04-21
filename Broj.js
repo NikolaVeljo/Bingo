@@ -41,28 +41,28 @@ UserInterface.prototype.bingoNumbersColor = function ( number ) {
     let backgroundColor;
 
     if (number <= 10) {
-        backgroundColor = 'hsl(61, 100%, 80%)';
+        backgroundColor = 'hsl(61, 100%, 80%, 0.6)';
     }
     else if (number <= 20) {
-        backgroundColor = 'hsl(205, 100%, 89%)';
+        backgroundColor = 'hsl(205, 100%, 89%, 0.6)';
     }
     else if (number <= 30) {
-        backgroundColor = 'hsl(286, 100%, 86%)';
+        backgroundColor = 'hsl(286, 100%, 86%, 0.6)';
     }
     else if (number <= 40) {
-        backgroundColor = 'hsl(112, 100%, 86%)';
+        backgroundColor = 'hsl(112, 100%, 86%, 0.6)';
     }
     else if (number <= 50) {
-        backgroundColor = 'hsl(43, 100%, 87%)';
+        backgroundColor = 'hsl(43, 100%, 87%, 0.6)';
     }
     else if (number <= 60) {
-        backgroundColor = 'hsl(305, 73%, 95%)';
+        backgroundColor = 'hsl(305, 73%, 95%, 0.6)';
     }
     else if (number <= 70) {
-        backgroundColor = 'hsl(356, 99%, 78%)';
+        backgroundColor = 'hsl(356, 99%, 78%, 0.6)';
     }
     else {
-        backgroundColor = 'hsl(144, 99%, 78%)';
+        backgroundColor = 'hsl(144, 99%, 78%, 0.6)';
     }
 
     return backgroundColor;
