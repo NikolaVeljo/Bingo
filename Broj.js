@@ -281,7 +281,7 @@ UserInterface.prototype.selectedNumbers = function () {
                                         document.querySelector('.mobile__output').remove();
                                     }
 
-                                }, 2700);
+                                }, 2500);
 
                                 
                             }, i * 3000 );
