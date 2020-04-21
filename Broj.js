@@ -272,12 +272,16 @@ UserInterface.prototype.selectedNumbers = function () {
                                         });
                                     }
                                     
+                                    
+                                }, 1500 );
+                                
+                                setTimeout(() => {
                                     if ( document.querySelector('.mobile__output') )
                                     {
                                         document.querySelector('.mobile__output').remove();
                                     }
 
-                                }, 2200 );
+                                }, 2700);
 
                                 
                             }, i * 3000 );
