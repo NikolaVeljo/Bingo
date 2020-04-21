@@ -216,7 +216,7 @@ UserInterface.prototype.selectedNumbers = function () {
                             
                             setTimeout(() => {
 
-                                if( window.outerWidth <= 600 )
+                                if( window.outerWidth <= 900 )
                                 {
                                     this.mobileOutput( this.displayBingoElement( ranNumbers[i] ) );
                                 }
@@ -289,11 +289,11 @@ UserInterface.prototype.selectedNumbers = function () {
                         startButton.remove();
                         
                         setTimeout( () => {
-                            if( corrNumbers.length >= 3 )
+                            if( corrNumbers.length >= 1 )
                             {
                                 let msgWin = document.querySelector('.message__content--text');
                                 
-                                msgWin.innerHTML = `<h1>Congratulations, you WON.If you want to play again <a href="https://nikolaveljo.github.io/Bingo/">click here</a></h1>
+                                msgWin.innerHTML = `<h1>Congratulations, you WON. <a href="https://nikolaveljo.github.io/Bingo/">click here</a> to play again</h1>  
                                 <p>You got ${corrNumbers.length} correct noumbers !</p>`;
                                 msgWin = document.querySelector( '.message' ).style.visibility = 'visible';
                             }
@@ -301,7 +301,7 @@ UserInterface.prototype.selectedNumbers = function () {
                                 let msgLose = document.querySelector( '.message' );
                                 let msgLoseText = document.querySelector( '.message__content--text' );
                                 
-                                msgLoseText.innerHTML = `<h1>You lose, you can <a href="https://nikolaveljo.github.io/Bingo/">click here</a> and try again</h1> <p>You got only ${ corrNumbers.length } correct noumbers !</p>`;
+                                msgLoseText.innerHTML = `<h1>You lose, <a href="https://nikolaveljo.github.io/Bingo/">click here</a> and try again</h1> <p>You got only ${ corrNumbers.length } correct noumbers !</p>`;
                                 msgLose.style.visibility = 'visible';
                             }
                             
