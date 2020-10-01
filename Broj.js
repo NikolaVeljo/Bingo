@@ -298,7 +298,7 @@ UserInterface.prototype.selectedNumbers = function () {
                                 let msgWin = document.querySelector('.message__content--text');
                                 
                                 msgWin.innerHTML = `<h1>Congratulations, you WON. <a href="https://nikolaveljo.github.io/Bingo/">click here</a> to play again</h1>  
-                                <p>You got ${corrNumbers.length} correct noumbers !</p>`;
+                                <p>You got ${corrNumbers.length} correct numbers !</p>`;
                                 msgWin = document.querySelector( '.message' ).style.visibility = 'visible';
                             }
                             else {          
